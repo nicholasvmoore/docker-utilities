@@ -1,0 +1,9 @@
+[Unit]
+Description=Remove untagged docker images
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+Nice=19
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
